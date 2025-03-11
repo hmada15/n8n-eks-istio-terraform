@@ -16,4 +16,3 @@ resource "helm_release" "n8n" {
     })
   ]
 }
-
