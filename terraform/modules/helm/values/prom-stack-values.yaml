@@ -1,0 +1,63 @@
+# Persistent storage configuration for Prometheus
+prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: istiod
+        kubernetes_sd_configs:
+          - namespaces:
+              names:
+                - istio-system
+            role: endpoints
+        relabel_configs:
+          - action: keep
+            regex: istiod;http-monitoring
+            source_labels:
+              - __meta_kubernetes_service_name
+              - __meta_kubernetes_endpoint_port_name
+      - job_name: envoy-stats
+        kubernetes_sd_configs:
+          - role: pod
+        metrics_path: /stats/prometheus
+        relabel_configs:
+          - action: keep
+            regex: .*-envoy-prom
+            source_labels:
+              - __meta_kubernetes_pod_container_port_name
+    scrapeConfigNamespaceSelector: null
+    retention: 365d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: standard-rwo
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 100Gi
+
+# Persistent storage configuration for Grafana
+grafana:
+  persistence:
+    enabled: true
+    storageClassName: standard-rwo
+    accessModes: ["ReadWriteOnce"]
+    size: 20Gi
+
+# Disable Prometheus Operator admission webhooks if necessary
+prometheusOperator:
+  tls:
+    enabled: false
+  admissionWebhooks:
+    enabled: false
+
+# alertmanager:
+#   enabled: false
+
+nodeExporter:
+  enabled: true
+  operatingSystems:
+    linux:
+      enabled: true
+    aix:
+      enabled: false
+    darwin:
+      enabled: false
