@@ -32,13 +32,18 @@ module "k8s" {
 module "helm" {
   source = "./modules/helm"
 
-  env                 = var.env
-  terraform_tags      = var.terraform_tags
-  eks_cluster_name    = module.eks.eks_cluster_name
-  vpc_id              = module.vpc.vpc_id
-  eks_cluster_node_id = module.eks.eks_cluster_node_id
-  region              = var.region
-  grafana_password    = var.grafana_password
+  env                  = var.env
+  terraform_tags       = var.terraform_tags
+  eks_cluster_name     = module.eks.eks_cluster_name
+  vpc_id               = module.vpc.vpc_id
+  eks_cluster_node_id  = module.eks.eks_cluster_node_id
+  region               = var.region
+  grafana_password     = var.grafana_password
+  db_username          = var.db_username
+  db_password          = var.db_password
+  rds_postgres_address = module.db.rds_postgres_address
+  rds_postgres_port    = module.db.rds_postgres_port
+  n8n_encryption_key   = var.n8n_encryption_key
 }
 
 module "db" {

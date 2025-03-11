@@ -70,3 +70,6 @@ variable "db_instance_class" {
 variable "db_backup_retention_period" {
   type = string
 }
+variable "n8n_encryption_key" {
+  type = string
+}

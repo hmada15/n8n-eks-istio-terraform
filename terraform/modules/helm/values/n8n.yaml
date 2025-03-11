@@ -1,0 +1,26 @@
+main:
+  config:
+    db:
+      type: postgresdb
+      postgresdb:
+        host: "${db_host}"
+        port: "${db_port}"
+        user: "${db_username}"
+        password: "${db_password}"
+  secret:
+    n8n:
+      encryption_key: "${encryption_key}"
+
+  resources:
+    limits:
+      memory: 2048Mi
+    requests:
+      memory: 512Mi
+
+  persistence:
+    enabled: true
+    type: dynamic
+    storageClass: "gp2"
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
