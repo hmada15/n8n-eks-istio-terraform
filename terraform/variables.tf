@@ -29,3 +29,6 @@ variable "terraform_tags" {
     "provisioner" : "terraform"
   }
 }
+variable "grafana_password" {
+  type = string
+}

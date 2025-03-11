@@ -16,3 +16,6 @@ variable "region" {
 variable "terraform_tags" {
   type = map(any)
 }
+variable "grafana_password" {
+  type = string
+}

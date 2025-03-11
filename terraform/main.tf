@@ -38,4 +38,5 @@ module "helm" {
   vpc_id              = module.vpc.vpc_id
   eks_cluster_node_id = module.eks.eks_cluster_node_id
   region              = var.region
+  grafana_password    = var.grafana_password
 }
