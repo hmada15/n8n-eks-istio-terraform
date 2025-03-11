@@ -40,3 +40,20 @@ module "helm" {
   region              = var.region
   grafana_password    = var.grafana_password
 }
+
+module "db" {
+  source = "./modules/db"
+
+  db_allocated_storage       = var.db_allocated_storage
+  db_storage_type            = var.db_storage_type
+  db_engine_version          = var.db_engine_version
+  db_instance_class          = var.db_instance_class
+  db_name                    = var.db_name
+  db_username                = var.db_username
+  db_password                = var.db_password
+  db_parameter_group_name    = var.db_parameter_group_name
+  db_backup_retention_period = var.db_backup_retention_period
+  db_identifier              = var.db_identifier
+  db_security_group_ids      = var.db_security_group_ids
+  db_subnet_group_name       = var.db_subnet_group_name
+}
