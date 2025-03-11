@@ -28,3 +28,14 @@ module "k8s" {
   eks_cluster_node_id = module.eks.eks_cluster_node_id
   region              = var.region
 }
+
+module "helm" {
+  source = "./modules/helm"
+
+  env                 = var.env
+  terraform_tags      = var.terraform_tags
+  eks_cluster_name    = module.eks.eks_cluster_name
+  vpc_id              = module.vpc.vpc_id
+  eks_cluster_node_id = module.eks.eks_cluster_node_id
+  region              = var.region
+}
